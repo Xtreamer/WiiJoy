@@ -6,3 +6,5 @@ C:\Users\Jonas\Downloads\SerialPortListener_270410\SerialPortListener\SerialPort
 C:\Users\Jonas\Downloads\SerialPortListener_270410\SerialPortListener\SerialPortListener\obj\x86\Debug\SerialPortListener.csproj.GenerateResource.Cache
 C:\Users\Jonas\Downloads\SerialPortListener_270410\SerialPortListener\SerialPortListener\obj\x86\Debug\SerialPortListener.exe
 C:\Users\Jonas\Downloads\SerialPortListener_270410\SerialPortListener\SerialPortListener\obj\x86\Debug\SerialPortListener.pdb
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SerialPortListener.exe
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SerialPortListener.pdb
