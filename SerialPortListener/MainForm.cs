@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using SerialPortListener.Serial;
+using SerialPortListener;
 
 namespace SerialPortListener
 {
@@ -8,6 +9,7 @@ namespace SerialPortListener
     {
         SerialPortManager _serialPortManager;
         SerialPortDataParser _parser;
+        VJoyManager _vJoyManager;
 
         public MainForm()
         {
@@ -18,7 +20,9 @@ namespace SerialPortListener
         private void UserInitialization()
         {
             _parser = new SerialPortDataParser();
-            _serialPortManager = new SerialPortManager();           
+            _serialPortManager = new SerialPortManager();
+            _vJoyManager = new VJoyManager();
+
             var mySerialSettings = _serialPortManager.CurrentSerialSettings;
             serialSettingsBindingSource.DataSource = mySerialSettings;
             portNameComboBox.DataSource = mySerialSettings.PortNameCollection;
@@ -29,15 +33,16 @@ namespace SerialPortListener
 
             _serialPortManager.NewSerialDataRecieved += NewSerialDataRecieved;
             _serialPortManager.NewSerialDataRecieved += _parser.NewSerialDataRecieved;
-            _parser.NewPositionDataRecieved += Parser_NewPositionDataRecieved;
+            _parser.NewPositionDataRecieved += _vJoyManager.SetPositions;
+            _parser.NewPositionDataRecieved += OnNewPositionDataRecieved;
             this.FormClosing += MainForm_FormClosing;            
         }
 
-        private void Parser_NewPositionDataRecieved(object sender, SerialPortDataParser.PositionDataEventArgs e)
+        private void OnNewPositionDataRecieved(object sender, SerialPortDataParser.PositionDataEventArgs e)
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new EventHandler<SerialPortDataParser.PositionDataEventArgs>(Parser_NewPositionDataRecieved), new object[] { sender, e });
+                BeginInvoke(new EventHandler<SerialPortDataParser.PositionDataEventArgs>(OnNewPositionDataRecieved), new object[] { sender, e });
                 return;
             }
 
@@ -70,6 +75,7 @@ namespace SerialPortListener
         
         private void btnStart_Click(object sender, EventArgs e)
         {
+            _vJoyManager.Initialize();
             _serialPortManager.StartListening();
         }
         
