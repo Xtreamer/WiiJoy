@@ -11,7 +11,10 @@ namespace SerialPortListener
         public vJoy joystick;
         public vJoy.JoystickState iReport;
         public uint deviceId = 1;
-        private long maxval;
+        private long xMaxVal;
+        private long xMinVal;
+        private long yMaxVal;
+        private long yMinVal;
 
         public void Initialize()
         {
@@ -90,16 +93,19 @@ namespace SerialPortListener
             else
                 Console.WriteLine("Acquired: vJoy device number {0}.\n", deviceId);
 
-            joystick.GetVJDAxisMax(deviceId, HID_USAGES.HID_USAGE_X, ref maxval);
+            joystick.GetVJDAxisMax(deviceId, HID_USAGES.HID_USAGE_X, ref xMaxVal);
+            joystick.GetVJDAxisMin(deviceId, HID_USAGES.HID_USAGE_X, ref xMinVal);
+            joystick.GetVJDAxisMax(deviceId, HID_USAGES.HID_USAGE_Y, ref yMaxVal);
+            joystick.GetVJDAxisMin(deviceId, HID_USAGES.HID_USAGE_Y, ref yMinVal);
         }
 
         public void SetPositions(object sender, SerialPortDataParser.PositionDataEventArgs e)
         {
             iReport.bDevice = (byte)deviceId;
-            iReport.AxisX = ScaleValue(e.Roll);
-            iReport.AxisY = ScaleValue(e.Pitch);
-            iReport.AxisZ = ScaleValue(e.Throttle);
-            iReport.AxisZRot = ScaleValue(e.Yaw);
+            iReport.AxisX = ScaleValue(e.Roll, xMinVal, xMaxVal);
+            iReport.AxisY = ScaleValue(e.Pitch, yMinVal, yMaxVal);
+            iReport.AxisZ = ScaleValue(e.Throttle, yMinVal, yMaxVal);
+            iReport.AxisZRot = ScaleValue(e.Yaw, xMinVal, xMaxVal);
             iReport.AxisXRot = 0;
 
             var updateSucceeded = joystick.UpdateVJD(deviceId, ref iReport);
@@ -110,10 +116,20 @@ namespace SerialPortListener
             }
         }
 
-        private int ScaleValue(short value)
+        private int ScaleValue(short value, long min, long max)
         {
-            var scaleFactor = maxval * 0.001;
-            return (int)((value - 1500) * scaleFactor);
+            var scaleFactor = (max - min) * 0.001;
+            var scaledValue = (long)((value - 1000) * scaleFactor);
+            if (scaledValue < min)
+            {
+                scaledValue = min;
+            }
+            else if (scaledValue > max)
+            {
+                scaledValue = max;
+            }
+            Console.WriteLine(scaledValue);
+            return (int)scaledValue;
         }
     }
 }

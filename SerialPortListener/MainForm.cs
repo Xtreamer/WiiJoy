@@ -75,8 +75,8 @@ namespace SerialPortListener
         
         private void btnStart_Click(object sender, EventArgs e)
         {
-            _serialPortManager.StartListening();
             _vJoyManager.Initialize();
+            _serialPortManager.StartListening();            
         }
         
         private void btnStop_Click(object sender, EventArgs e)
