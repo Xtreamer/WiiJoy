@@ -58,7 +58,7 @@ namespace SerialPortListener
 
             elapsedLabel.Text = e.TimeSinceLast.ToString() + " ms";
         }
-
+        
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _serialPortManager.Dispose();   
@@ -82,6 +82,17 @@ namespace SerialPortListener
         private void btnStop_Click(object sender, EventArgs e)
         {
             _serialPortManager.StopListening();
+            ClearDataView();
+        }
+
+        private void ClearDataView()
+        {
+            rollTextBox.Text = string.Empty;
+            pitchTextBox.Text = string.Empty;
+            yawTextBox.Text = string.Empty;
+            throttleTextBox.Text = string.Empty;
+            aux1TextBox.Text = string.Empty;
+            elapsedLabel.Text = string.Empty;
         }
     }
 }

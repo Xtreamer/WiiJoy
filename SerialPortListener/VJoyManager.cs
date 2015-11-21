@@ -79,6 +79,7 @@ namespace SerialPortListener
             else
                 Console.WriteLine("Version of Driver ({0:X}) does NOT match DLL Version ({1:X})\n", DrvVer, DllVer);
 
+            System.Threading.Thread.Sleep(500);
 
             // Acquire the target
             if ((status == VjdStat.VJD_STAT_OWN) || ((status == VjdStat.VJD_STAT_FREE) && (!joystick.AcquireVJD(deviceId))))
@@ -95,10 +96,10 @@ namespace SerialPortListener
         public void SetPositions(object sender, SerialPortDataParser.PositionDataEventArgs e)
         {
             iReport.bDevice = (byte)deviceId;
-            iReport.AxisX = e.Roll;
-            iReport.AxisY = e.Pitch;
-            iReport.AxisZ = e.Throttle;
-            iReport.AxisZRot = e.Yaw;
+            iReport.AxisX = ScaleValue(e.Roll);
+            iReport.AxisY = ScaleValue(e.Pitch);
+            iReport.AxisZ = ScaleValue(e.Throttle);
+            iReport.AxisZRot = ScaleValue(e.Yaw);
             iReport.AxisXRot = 0;
 
             var updateSucceeded = joystick.UpdateVJD(deviceId, ref iReport);
@@ -107,6 +108,12 @@ namespace SerialPortListener
                 Console.WriteLine("Feeding vJoy device number {0} failed - try to enable device then press enter\n", deviceId);                
                 joystick.AcquireVJD(deviceId);
             }
+        }
+
+        private int ScaleValue(short value)
+        {
+            var scaleFactor = maxval * 0.001;
+            return (int)((value - 1500) * scaleFactor);
         }
     }
 }
