@@ -51,6 +51,9 @@ namespace SerialPortListener.Serial
             int dataLength = _serialPort.BytesToRead;
             byte[] data = new byte[dataLength];
             int bytesRead = _serialPort.Read(data, 0, dataLength);
+
+            //Console.WriteLine(bytesRead);
+
             if (bytesRead == 0)
                 return;
 

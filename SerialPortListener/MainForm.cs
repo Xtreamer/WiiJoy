@@ -22,7 +22,7 @@ namespace SerialPortListener
             _parser = new SerialPortDataParser();
             _serialPortManager = new SerialPortManager();
             _vJoyManager = new VJoyManager();
-
+            
             var mySerialSettings = _serialPortManager.CurrentSerialSettings;
             serialSettingsBindingSource.DataSource = mySerialSettings;
             portNameComboBox.DataSource = mySerialSettings.PortNameCollection;
@@ -75,8 +75,8 @@ namespace SerialPortListener
         
         private void btnStart_Click(object sender, EventArgs e)
         {
-            _vJoyManager.Initialize();
             _serialPortManager.StartListening();
+            _vJoyManager.Initialize();
         }
         
         private void btnStop_Click(object sender, EventArgs e)

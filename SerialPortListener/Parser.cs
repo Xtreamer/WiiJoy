@@ -7,11 +7,11 @@ namespace SerialPortListener
 {
     public class SerialPortDataParser
     {
-        Thread worker;
-        private bool _quit = false;
+        //Thread worker;
+        //private bool _quit = false;
         private const int bufferSize = 200;
         private byte[] buffer;
-        private int position;
+        //private int position;
         private byte[] responsePrefix;
         private Stopwatch stopwatch;
         public event EventHandler<PositionDataEventArgs> NewPositionDataRecieved;
@@ -20,7 +20,7 @@ namespace SerialPortListener
         {
             buffer = new byte[bufferSize];
             responsePrefix = new byte[] { (byte)'$', (byte)'M', (byte)'>', 16, 105 };
-            position = 0;
+            //position = 0;
             stopwatch = new Stopwatch();
             stopwatch.Start();
         }
