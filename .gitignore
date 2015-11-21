@@ -13,3 +13,6 @@ SerialPortListener/obj/x86/Debug/SimJoy.exe
 SerialPortListener/obj/x86/Debug/SimJoy.pdb
 SerialPortListener/obj/x86/Debug/SimJoy.Properties.Resources.resources
 SerialPortListener/obj/x86/Debug/TempPE/Properties.Resources.Designer.cs.dll
+*.exe
+*.pdb
+*.cache
