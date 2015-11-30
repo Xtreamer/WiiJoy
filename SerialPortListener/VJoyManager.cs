@@ -127,8 +127,7 @@ namespace SerialPortListener
             else if (scaledValue > max)
             {
                 scaledValue = max;
-            }
-            Console.WriteLine(scaledValue);
+            }            
             return (int)scaledValue;
         }
     }

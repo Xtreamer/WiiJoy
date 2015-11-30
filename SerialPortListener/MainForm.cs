@@ -32,7 +32,7 @@ namespace SerialPortListener
             stopBitsComboBox.DataSource = Enum.GetValues(typeof(System.IO.Ports.StopBits));
 
             _serialPortManager.NewSerialDataRecieved += NewSerialDataRecieved;
-            _serialPortManager.NewSerialDataRecieved += _parser.NewSerialDataRecieved;
+            _serialPortManager.NewSerialDataRecieved += _parser.NewSerialDataReceived;
             _parser.NewPositionDataRecieved += _vJoyManager.SetPositions;
             _parser.NewPositionDataRecieved += OnNewPositionDataRecieved;
             this.FormClosing += MainForm_FormClosing;            

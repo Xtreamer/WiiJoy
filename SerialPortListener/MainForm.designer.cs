@@ -319,7 +319,7 @@
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.groupBox1);
             this.Name = "MainForm";
-            this.Text = "RSLog Plus";
+            this.Text = "SimJoy";
             ((System.ComponentModel.ISupportInitialize)(this.serialSettingsBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

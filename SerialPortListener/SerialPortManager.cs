@@ -132,12 +132,12 @@ namespace SerialPortListener.Serial
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                _serialPort.DataReceived -= OnSerialPortDataReceived;
-            }
             if (_serialPort != null)
             {
+                if (disposing)
+                {
+                    _serialPort.DataReceived -= OnSerialPortDataReceived;
+                }
                 if (_serialPort.IsOpen)
                     _serialPort.Close();
 

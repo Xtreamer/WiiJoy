@@ -25,14 +25,12 @@ namespace SerialPortListener
             stopwatch.Start();
         }
         
-        public void NewSerialDataRecieved(object sender, SerialDataEventArgs e)
+        public void NewSerialDataReceived(object sender, SerialDataEventArgs e)
         {
             //Console.WriteLine("Elapsed {0}", stopwatch.ElapsedMilliseconds);
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
             stopwatch.Restart();
-
-            //Console.WriteLine("handle, length: {0}", e.Length);
-
+            
             if (e.Length == 0)
             {
                 return;
@@ -40,6 +38,18 @@ namespace SerialPortListener
 
             var data = e.Data;
 
+            var startIndex = Array.LastIndexOf(data, responsePrefix[0]);
+            if (startIndex < 0)
+            {
+                return;
+            }
+            if (startIndex + (16 + 6) < e.Length)
+            {
+                startIndex = startIndex - (16 + 6);
+            }          
+
+            //Console.WriteLine("handle, length: {0}, firstIndex {1}, charAtFirst {2}", e.Length, startIndex, data[startIndex]);
+            
             if (data.Length > 15 &&
                 data[0] == responsePrefix[0] &&
                 data[1] == responsePrefix[1] &&
