@@ -106,7 +106,10 @@ namespace SerialPortListener.Serial
 
         public void StopListening()
         {
-            _serialPort.Close();
+            if (_serialPort != null && _serialPort.IsOpen)
+            {
+                _serialPort.Close();
+            }
         }
 
         private void UpdateBaudRateCollection()

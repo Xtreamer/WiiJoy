@@ -10,10 +10,20 @@ namespace SerialPortListener
         //Thread worker;
         //private bool _quit = false;
         private const int bufferSize = 200;
+        private const int payloadLength = 16;
+        private const int headerLength = 6;
         private byte[] buffer;
         //private int position;
         private byte[] responsePrefix;
+        private short numberOfChannels = 4;
         private Stopwatch stopwatch;
+
+        public short NumberOfChannels
+        {
+            get { return numberOfChannels; }
+            set { numberOfChannels = value; }
+        }
+
         public event EventHandler<PositionDataEventArgs> NewPositionDataRecieved;
 
         public SerialPortDataParser()
@@ -43,13 +53,23 @@ namespace SerialPortListener
             {
                 return;
             }
-            if (startIndex + (16 + 6) < e.Length)
-            {
-                startIndex = startIndex - (16 + 6);
-            }          
 
+            var indexBefore = startIndex;
+            if (startIndex + (payloadLength + headerLength) > e.Length)
+            {
+                startIndex = Array.IndexOf(data, responsePrefix[0]);
+                //startIndex = startIndex - (payloadLength + headerLength);
+                Console.WriteLine("before {0}, now {1}, length {2}", indexBefore, startIndex, e.Length);
+            }
+            //if (startIndex + 1 < e.Length && data[startIndex + 1] != responsePrefix[1])
+            //{
+            //    Console.WriteLine("not complete {0}", DateTime.Now);
+            //    return;
+            //}
+            //if (startIndex != indexBefore)
+            //    Console.WriteLine("good, index now: {0}, index before: {1}, length: {2}, left: {3}", startIndex, indexBefore, e.Length, e.Length - startIndex + 1);
             //Console.WriteLine("handle, length: {0}, firstIndex {1}, charAtFirst {2}", e.Length, startIndex, data[startIndex]);
-            
+
             if (data.Length > 15 &&
                 data[0] == responsePrefix[0] &&
                 data[1] == responsePrefix[1] &&
