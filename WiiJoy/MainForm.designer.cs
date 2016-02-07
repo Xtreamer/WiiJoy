@@ -1,4 +1,4 @@
-﻿namespace SerialPortListener
+﻿namespace WiiJoy
 {
     partial class MainForm
     {
@@ -120,7 +120,7 @@
             // 
             // serialSettingsBindingSource
             // 
-            this.serialSettingsBindingSource.DataSource = typeof(SerialPortListener.Serial.SerialSettings);
+            this.serialSettingsBindingSource.DataSource = typeof(WiiJoy.Serial.SerialSettings);
             // 
             // dataBitsComboBox
             // 

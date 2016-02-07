@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using SerialPortListener.Serial;
-using SerialPortListener;
+using WiiJoy.Serial;
+using WiiJoy;
 
-namespace SerialPortListener
+namespace WiiJoy
 {
     public partial class MainForm : Form
     {

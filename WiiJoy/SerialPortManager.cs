@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Diagnostics;
 
-namespace SerialPortListener.Serial
+namespace WiiJoy.Serial
 {
     public class SerialPortManager : IDisposable
     {
@@ -15,13 +15,9 @@ namespace SerialPortListener.Serial
         public event EventHandler<SerialDataEventArgs> NewSerialDataRecieved;
         Thread senderThread;
         private byte[] request;
-        private Stopwatch stopwatch;
 
         public SerialPortManager()
         {
-            //stopwatch = new Stopwatch();
-            //stopwatch.Start();
-
             request = new byte[] { (byte)'$', (byte)'M', (byte)'<', 0, 105, 105 };
 
             _currentSerialSettings.PortNameCollection = SerialPort.GetPortNames();
@@ -45,14 +41,9 @@ namespace SerialPortListener.Serial
 
         void OnSerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //Console.WriteLine("Elapsed {0}", stopwatch.ElapsedMilliseconds);
-            //stopwatch.Restart();
-
             int dataLength = _serialPort.BytesToRead;
             byte[] data = new byte[dataLength];
             int bytesRead = _serialPort.Read(data, 0, dataLength);
-
-            //Console.WriteLine(bytesRead);
 
             if (bytesRead == 0)
                 return;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Diagnostics;
-using SerialPortListener.Serial;
+using WiiJoy.Serial;
 
-namespace SerialPortListener
+namespace WiiJoy
 {
     public class SerialPortDataParser
     {
@@ -13,8 +13,6 @@ namespace SerialPortListener
         private byte[] buffer;
         private byte[] responsePrefix = new byte[] { (byte)'$', (byte)'M', (byte)'>', 16, 105 };
         private Stopwatch stopwatch;
-        private long numberOfPackets = 0;
-        private long badPackets = 0;
 
         public short NumberOfChannels { get; set; } = 4;
         
@@ -30,14 +28,11 @@ namespace SerialPortListener
         
         public void NewSerialDataReceived(object sender, SerialDataEventArgs e)
         {
-            //numberOfPackets++;
-            //Console.WriteLine("Elapsed {0}", stopwatch.ElapsedMilliseconds);
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
             stopwatch.Restart();
             
             if (e.Length == 0)
             {
-                //badPackets++;
                 return;
             }
 
@@ -56,8 +51,6 @@ namespace SerialPortListener
                 startIndex = Array.IndexOf(data, responsePrefix[0]);
                 if (indexBefore == startIndex)
                 {
-                    //badPackets++;
-                    //Console.WriteLine("badPackets: {0} %", ((float)badPackets / numberOfPackets) * 100);
                     return;
                 }
             }

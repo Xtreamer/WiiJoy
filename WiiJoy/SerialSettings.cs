@@ -5,7 +5,7 @@ using System.Text;
 using System.IO.Ports;
 using System.ComponentModel;
 
-namespace SerialPortListener.Serial
+namespace WiiJoy.Serial
 {
     /// <summary>
     /// Class containing properties related to a serial port 

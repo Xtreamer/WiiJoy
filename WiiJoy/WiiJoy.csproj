@@ -8,8 +8,8 @@
     <ProjectGuid>{D6883E9E-C532-4FDF-AFEE-61C47F8A4A1D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimJoy</RootNamespace>
-    <AssemblyName>SimJoy</AssemblyName>
+    <RootNamespace>WiiJoy</RootNamespace>
+    <AssemblyName>WiiJoy</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

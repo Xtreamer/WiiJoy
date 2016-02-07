@@ -1,0 +1,10 @@
+C:\Projekt\SimJoy\SerialPortListener\bin\Debug\vJoyInterface.dll
+C:\Projekt\SimJoy\SerialPortListener\bin\Debug\SimJoy.exe
+C:\Projekt\SimJoy\SerialPortListener\bin\Debug\SimJoy.pdb
+C:\Projekt\SimJoy\SerialPortListener\bin\Debug\vJoyInterfaceWrap.dll
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SimJoy.csprojResolveAssemblyReference.cache
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SerialPortListener.MainForm.resources
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SimJoy.Properties.Resources.resources
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SimJoy.csproj.GenerateResource.Cache
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SimJoy.exe
+C:\Projekt\SimJoy\SerialPortListener\obj\x86\Debug\SimJoy.pdb
